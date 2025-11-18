@@ -1,6 +1,6 @@
 # Aperture Alchemist ✨
 
-A modern, responsive creative agency website crafted by **Saswata Ghosh**, specializing in video production and marketing services. Built with cutting-edge web technologies to showcase creative work and attract clients.
+A modern, responsive creative agency website crafted by **Saswata Ghosh and his team**, specializing in video production and marketing services. Built with cutting-edge web technologies to showcase creative work and attract clients.
 
 ## 🌟 Features
 
@@ -190,3 +190,23 @@ For questions, feedback, or collaboration opportunities, feel free to reach out:
 ---
 
 Crafted with passion and precision by **Saswata Ghosh** ✨
+
+## 🔧 Local Development (Notes)
+
+- Start the dev server with `npm run dev`. Depending on your Vite config the local URL may be `http://localhost:5173` or `http://localhost:8080` — check the terminal output when Vite starts.
+- The project previously used Supabase for dynamic content. For safety, this repository's checked-in `.env` does not contain any Supabase keys. If you need to re-enable Supabase locally, add your keys to a local `.env` (do not commit them):
+
+```
+# Example (do NOT commit):
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=public-anon-key
+```
+
+- If you do not plan to use Supabase, the app includes stubs that return empty datasets so pages will render with local/sample content.
+
+## 📝 Notes about recent changes
+
+- A small visual update was made to the `LogoTicker` component to remove the dark gradient overlays at the sides.
+- A branch named `Updated-branch` contains these recent edits (logo ticker + safe Supabase stub and sample data). If you'd like a different branch name or a PR created for this branch, tell me and I can prepare the PR text.
+
+If anything in this README should be expanded, or you want a brief 'Deploy to Vercel' section, tell me where and I'll add it.
