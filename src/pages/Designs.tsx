@@ -4,51 +4,32 @@ import GradientText from '../components/atoms/GradientText';
 import FilterTab from '../components/atoms/FilterTab';
 import AnimatedButton from '../components/atoms/AnimatedButton';
 import DesignCard from '../components/atoms/DesignCard';
-import { supabase } from '@/lib/supabaseClient';
 
 const Designs: React.FC = () => {
   const [designs, setDesigns] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
 
   const filters = [
     'All', 'Poster', 'Banner', 'Brochure', 'Invitation Card', 'Logo', 'Social Media Post'
   ];
 
-  // 🔹 Helper to get a correct thumbnail (Drive / YouTube / fallback)
-  const getThumbnail = (image?: string, drivelinks?: string[] | null) => {
-    // If an image URL is already stored, return it
+  // Helper to get thumbnail (only local/public URLs now)
+  const getThumbnail = (image?: string) => {
     if (image) return image;
-
-    // If drive links are available, use the first one as thumbnail
-    if (drivelinks && drivelinks.length > 0) {
-      const firstLink = drivelinks[0];
-      const match = firstLink.match(/\/d\/([^/]+)/);
-      if (match?.[1]) {
-        return `https://drive.google.com/thumbnail?id=${match[1]}`;
-      }
-    }
-
-    // Fallback
-    return 'https://via.placeholder.com/600x600.png?text=No+Preview';
+    return '/placeholder.svg';
   };
-
-  // 🔹 Fetch designs from Supabase
+  // Using a local static dataset now (database removed)
   useEffect(() => {
-    const fetchDesigns = async () => {
-      const { data, error } = await supabase
-        .from('designs')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching designs:', error.message);
-      } else {
-        setDesigns(data || []);
-      }
-      setLoading(false);
-    };
-    fetchDesigns();
+    const sample = [
+      { id: 1, title: 'Modern Poster', categories: ['Poster'], image: '/placeholder.svg' },
+      { id: 2, title: 'Event Banner', categories: ['Banner'], image: '/placeholder.svg' },
+      { id: 3, title: 'Product Brochure', categories: ['Brochure'], image: '/placeholder.svg' },
+      { id: 4, title: 'Wedding Invite', categories: ['Invitation Card'], image: '/placeholder.svg' },
+      { id: 5, title: 'Logo Suite', categories: ['Logo'], image: '/placeholder.svg' },
+      { id: 6, title: 'Social Post Pack', categories: ['Social Media Post'], image: '/placeholder.svg' }
+    ];
+    setDesigns(sample);
   }, []);
 
   // 🔹 Filter designs based on active filter
@@ -124,7 +105,7 @@ const Designs: React.FC = () => {
                       key={`${design.id}-${activeFilter}`}
                       title={design.title}
                       category={design.categories || design.category}
-                      image={getThumbnail(design.image, design.drivelinks)}
+                      image={getThumbnail(design.image)}
                       delay={index * 0.1}
                     />
                   ))}

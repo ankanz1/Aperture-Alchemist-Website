@@ -1,8 +1,30 @@
 // src/lib/supabaseClient.ts
-import { createClient } from "@supabase/supabase-js";
+// NOTE: Supabase integration removed/disabled.
+// This stub keeps existing imports working but returns empty results.
+// If you want to re-enable Supabase, replace this file with a real client using
+// `createClient` from '@supabase/supabase-js' and add your keys back to `.env`.
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL!;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY!;
+type QueryResult = { data: any[] | null; error: any | null };
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-export default supabase; // ✅ so default imports work
+const warn = () => console.warn('[supabase stub] Database access is disabled.');
+
+const stubFrom = (tableName?: string) => ({
+	select: async (_sel?: string) : Promise<QueryResult> => {
+		warn();
+		return { data: [], error: null };
+	},
+	order: function() { return this; },
+	limit: function() { return this; }
+});
+
+export const supabase = {
+	from: stubFrom,
+	storage: {
+		from: (_bucket: string) => ({
+			// keeps signature similar to real API
+			getPublicUrl: (_path: string) => ({ publicURL: '' })
+		})
+	}
+};
+
+export default supabase;

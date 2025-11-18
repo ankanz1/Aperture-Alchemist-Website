@@ -24,7 +24,7 @@ const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-40">
+  <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Images - Parallax */}
       <motion.div 
         style={{ y: backgroundY }}
