@@ -45,14 +45,14 @@ const Navbar: React.FC = () => {
         }`}
       >
         <div className="mx-auto w-[95%] max-w-6xl">
-          <nav className="glass-card rounded-full px-6 py-3 flex items-center justify-between relative shadow-2xl backdrop-blur-xl border border-white/20 w-full">
+          <nav className="glass-card rounded-full px-6 py-2 flex items-center justify-between relative shadow-2xl backdrop-blur-xl border border-white/20 w-full">
             
             {/* ================= LOGO ================= */}
             <NavLink to="/" className="flex items-center gap-3 flex-shrink-0">
               <img
                 src={`${import.meta.env.BASE_URL}logo.webp`}
                 alt="Aperture Alchemist Logo"
-                className="h-20 w-auto"
+                className="h-14 w-auto"
                 loading="lazy"
               />
             </NavLink>
